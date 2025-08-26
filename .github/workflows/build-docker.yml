@@ -11,8 +11,8 @@ on:
       - 'v*.*.*'
 env:
   REGISTRY: ghcr.io
-  IMAGE_BACKEND: ticketz-oss/ticketz-backend
-  IMAGE_FRONTEND: ticketz-oss/ticketz-frontend
+  IMAGE_BACKEND: tekvosoft-chat/ticketz-backend
+  IMAGE_FRONTEND: tekvosoft-chat/ticketz-frontend
 
 jobs:
   build-and-push-images:
