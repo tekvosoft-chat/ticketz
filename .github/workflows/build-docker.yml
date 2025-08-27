@@ -9,7 +9,7 @@ on:
       - 'test-**'
     tags:
       - 'v*.*.*'
-env:
+env: 
   REGISTRY: ghcr.io
   IMAGE_BACKEND: tekvosoft-chat/ticketz-backend
   IMAGE_FRONTEND: tekvosoft-chat/ticketz-frontend
