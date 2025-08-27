@@ -2,7 +2,7 @@ FROM node:20-alpine as build-deps
 
 WORKDIR /usr/src/app
 COPY . .
-
+ 
 ENV NODE_OPTIONS --openssl-legacy-provider
 
 RUN --mount=type=cache,target=/root/.npm \
