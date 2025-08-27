@@ -1,5 +1,5 @@
 name: Create and publish multi-arch Docker images
-   
+
 on:
   push:
     branches:
@@ -9,10 +9,11 @@ on:
       - 'test-**'
     tags:
       - 'v*.*.*'
-env: 
+env:
   REGISTRY: ghcr.io
-  IMAGE_BACKEND: tekvosoft-chat/ticketz-backend
-  IMAGE_FRONTEND: tekvosoft-chat/ticketz-frontend
+  # ALTERADO: Nomes das imagens agora são dinâmicos para o seu repositório
+  IMAGE_BACKEND: ${{ github.repository }}-backend
+  IMAGE_FRONTEND: ${{ github.repository }}-frontend
 
 jobs:
   build-and-push-images:
@@ -57,7 +58,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.GHCR_PAT  }}
+          password: ${{ secrets.GHCR_PAT }}
 
       - name: Docker meta Backend
         id: metabackend
@@ -109,3 +110,16 @@ jobs:
           platforms: linux/amd64,linux/arm64
           tags: ${{ steps.metafrontend.outputs.tags }}
           labels: ${{ steps.metafrontend.outputs.labels }}
+
+  # ADICIONADO: Novo job para criar releases a partir de tags
+  create-release:
+    needs: build-and-push-images
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    permissions:
+      contents: write
+    steps:
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          generate_release_notes: true
