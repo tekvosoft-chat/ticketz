@@ -74,6 +74,12 @@ O comando a seguir instalará as dependências do backend:
 npm ci
 ```
 
+### Nesta parte você vai precisar rodar um comando a mais na pasta backend:
+
+npm run generate:i18nkeys
+
+
+
 ### Arquivo de configuração
 
 O exemplo de configuração padrão deve ser copiado para o arquivo de configuração. Ele já possui um bom conjunto de parâmetros padrão.
