@@ -27,7 +27,6 @@ import { Backendlogs } from "../components/Backendlogs";
 import { PhoneCall } from "../components/PhoneCall";
 import NotificationsVolume from "../components/NotificationsVolume";
 import UserModal from "../components/UserModal";
-import AboutModal from "../components/AboutModal";
 import { AuthContext } from "../context/Auth/AuthContext";
 import BackdropLoading from "../components/BackdropLoading";
 import DarkMode from "../components/DarkMode";
@@ -176,7 +175,6 @@ const useStyles = makeStyles((theme) => ({
 const LoggedInLayout = ({ children, themeToggle }) => {
   const classes = useStyles();
   const [userModalOpen, setUserModalOpen] = useState(false);
-  const [aboutModalOpen, setAboutModalOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
@@ -321,11 +319,6 @@ const LoggedInLayout = ({ children, themeToggle }) => {
     handleCloseProfileMenu();
   };
 
-  const handleOpenAboutModal = () => {
-    setAboutModalOpen(true);
-    handleCloseProfileMenu();
-  };
-
   const handleClickLogout = () => {
     handleCloseProfileMenu();
     handleLogout();
@@ -386,10 +379,6 @@ const LoggedInLayout = ({ children, themeToggle }) => {
         open={userModalOpen}
         onClose={() => setUserModalOpen(false)}
         userId={user?.id}
-      />
-      <AboutModal
-        open={aboutModalOpen}
-        onClose={() => setAboutModalOpen(false)}
       />
       <AppBar
         position="absolute"
@@ -518,9 +507,6 @@ const LoggedInLayout = ({ children, themeToggle }) => {
                   ))
                 }
               </NestedMenuItem>
-              <MenuItem onClick={handleOpenAboutModal}>
-                {i18n.t("about.aboutthe")} {currentUser?.super ? "ticketz" : theme.appName}
-              </MenuItem>
               <MenuItem onClick={handleClickLogout}>
                 {i18n.t("mainDrawer.appBar.user.logout")}
               </MenuItem>
